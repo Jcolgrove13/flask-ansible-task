@@ -41,7 +41,7 @@ def insert_user(user):
         conn.commit()
         inserted_user = get_user_by_id(cur.lastrowid)
     except:
-        conn().rollback()
+        conn.rollback()
 
     finally:
         conn.close()
@@ -181,11 +181,11 @@ for i in users:
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-@app.route('/api/users', methods=['GET'])
+@app.route('/api/users', methods = ['GET'])
 def api_get_users():
     return jsonify(get_users())
 
-@app.route('/api/users/<user_id>', methods=['GET'])
+@app.route('/api/users/<user_id>', methods = ['GET'])
 def api_get_user(user_id):
     return jsonify(get_user_by_id(user_id))
 
